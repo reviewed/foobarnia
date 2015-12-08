@@ -1,0 +1,17 @@
+{
+  "name": "election",
+  "version": "0.0.0",
+  "description": "an election tallier",
+  "main": "election.js",
+  "dependencies": {
+    "tape": "^4.2.2"
+  },
+  "devDependencies": {
+    "tape": "^4.2.2"
+  },
+  "scripts": {
+    "test": "tape election_test.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
