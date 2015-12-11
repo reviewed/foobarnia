@@ -3,7 +3,7 @@ var election = require('./election')
 
 test('majority win', function (t) {
   t.plan(1);
-  var votes = [2,2,5,1,5,7,5,5,1,5,2];
+  var votes = [2,2,5,5,5,7,5,5,1,5,2];
   var results = election.tally(votes);
   t.same(results, [5]);
 });
