@@ -33,7 +33,7 @@ tests, [install Node/npm](https://docs.npmjs.com/getting-started/installing-node
 
 Then you can run the tests with
 
-`tape election_test.js`
+`node election_test.js`
 
 The 3 tests will currently fail. Once you get them passing, commit and push up
 your code.
