@@ -43,8 +43,16 @@ your code.
 Once the tests are passing, consider this done. But, keep in mind, the tests
 involve only a small sample of votes. In reality, the Republic of Foobarnia has a
 huge population - **9007199254740992** to be exact - and *everyone* votes.
+
+> Theoretically, as long as there is not a unanimous vote, we should be fine. If everyone DID vote for the same candidate, we could use BigInt. Beyond that, Arrays in JS have a max number of elements in the billions - significantly less than the quadrillions + 1 (that exceeds JS max num) - which would break our code well before all citizens could vote.
+
 Furthermore, anyone can run for president simply by sending a postcard to the
 election office, so there are typically *several thousand* candidates. How will
-your function behave under these circumstances? Should we be concerned about
+your function behave under these circumstances? 
+
+> I tried to optimize out of the gate, by shortcircuit returning if we catch more votes than the majority, using an object literal as a counter, etc.
+
+Should we be concerned about
 performance? Is there any way we can make it faster?
 
+>  However, one simple optimization would be to remove the final `.sort` in the return line
