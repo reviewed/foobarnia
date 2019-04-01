@@ -27,6 +27,11 @@ Then, the Foobarnians would like you to add a couple features:
 
 ##### Also worth thinking about (don't need to actually do it):
 
-Are there any other tests that should be added? Are there other ways the code
-could be improved? How would you advise the Foobarnians on better ways to look at
-this data?
+Are there any other tests that should be added? 
+> Tests for the additional filters would be great. More tests for `Auto` class would be nice.
+
+Are there other ways the code could be improved? 
+> Cleaning up the `mileage.rb` file into a class or module would be desirable.
+
+How would you advise the Foobarnians on better ways to look at this data?
+> Load it into a database and use something like (metabase)[https://metabase.com/]
