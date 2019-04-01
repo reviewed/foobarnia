@@ -6,16 +6,18 @@ class AutoSeeker
     @data = data
   end
 
-  def filter key, match
+  def filter! key, match
     @autos = autos.select do |auto|
-      auto.send(key) == match
+      auto.send(key) == match || 
+      (match.is_a?(Range) && match.include?(auto.send(key)))
     end
   end
 
   def autos
     @autos ||= @data.map do |row|
       Auto.new(row)
-    end
+    rescue ArgumentError
+    end.compact
   end
 
   def self.median_mileage autos

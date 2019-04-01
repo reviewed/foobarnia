@@ -1,13 +1,21 @@
 require 'csv'
+require './helpers'
 require './auto_seeker'
 
 data = CSV.read('foobarnian_autos.csv')
 
 seeker = AutoSeeker.new data
-autos = seeker.filter(:color, ARGV[0])
+ARGV.each do |arg|
+  args = CLI.paramaterize(arg)
+  puts "*" * 50
+  puts "Adding filter: #{args.first} should be #{args.last}"
+  puts "*" * 50
+  seeker.filter!(*args)
+end
+autos = seeker.autos
 
 if autos.length == 0
-  abort "no autos with color #{ARGV[0]} found"
+  abort "No autos found"
 end
 
 mileage = AutoSeeker.median_mileage(autos)
