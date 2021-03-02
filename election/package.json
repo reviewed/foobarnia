@@ -3,11 +3,8 @@
   "version": "0.0.0",
   "description": "an election tallier",
   "main": "election.js",
-  "dependencies": {
-    "tape": "^4.2.2"
-  },
   "devDependencies": {
-    "tape": "^4.2.2"
+    "tape": "^4.13.3"
   },
   "scripts": {
     "test": "tape election_test.js"
