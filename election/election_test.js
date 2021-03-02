@@ -8,13 +8,13 @@ test('majority win', function (t) {
   t.same(results, [5]);
 });
 
-// test('election runoff', function(t) {
-//   t.plan(1);
-//   var votes = [7,8,3,3,3,8,2,4,4,4,2,2,4,2,3,4,5,3,4,4];
-//   var results = election.tally(votes);
-//   results.sort( function(a,b) { a - b } );
-//   t.same(results, [2,3,4]);
-// });
+test('election runoff', function(t) {
+  t.plan(1);
+  var votes = [7,8,3,3,3,8,2,4,4,4,2,2,4,2,3,4,5,3,4,4];
+  var results = election.tally(votes);
+  results.sort( function(a,b) { a - b } );
+  t.same(results, [2,3,4]);
+});
 
 // test('election runoff with tie', function(t) {
 //   t.plan(1);
