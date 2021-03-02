@@ -1,30 +1,24 @@
 exports.tally = function(votes) {
   // TODO implement tally()
 
-  let tally = {}
-
-  votes.forEach(element => {
-    tally[element]
-      ? tally[element] += 1
-      : tally[element] = 1
-  });
-
-  let votesPerCandidate = getObjectValues(tally)
+  let tallyObject = tallyInitialVotes(votes)
+  let votesPerCandidate = getObjectValues(tallyObject)
   let highestVoteCount = Math.max(...votesPerCandidate)
   let totalVoteCount = sumOfObjectValues(votesPerCandidate)
-  let majority = checkForMajority(highestVoteCount,totalVoteCount);
+  let majority = hasMajority(highestVoteCount,totalVoteCount);
 
   if (majority) {
-    let candidateId = findKeyFromValues(tally, highestVoteCount);
+    let candidateId = findKeyFromValues(tallyObject, highestVoteCount);
     return [Number(candidateId)]
   }
 
+  // If no majority, continue to run off determination
   let runoffCount = 0
   let runoffCandidates = []
-  let tallyCopy = tally
+  let tallyCopy = tallyObject
 
   while (runoffCount < 3) {
-    let votesPerCandidate = getObjectValues(tally)
+    let votesPerCandidate = getObjectValues(tallyCopy)
     let keyToRunoff = findKeyFromValues(tallyCopy, Math.max(...votesPerCandidate))
 
     runoffCandidates.push(Number(keyToRunoff))
@@ -35,8 +29,10 @@ exports.tally = function(votes) {
 
     if (runoffCount === 2) {
       let nextHighestVoteCount = Math.max(...Object.values(tallyCopy))
-      let runnOffers = filterKeysFromValues(tallyCopy, nextHighestVoteCount)
-      runnOffers.forEach(element => runoffCandidates.push(Number(element)))
+      let thirdPlaceTie = filterKeysFromValues(tallyCopy, nextHighestVoteCount)
+
+      thirdPlaceTie.forEach(element => runoffCandidates.push(Number(element)))
+
       return runoffCandidates.sort()
     }
   }
@@ -45,17 +41,35 @@ exports.tally = function(votes) {
 
 const MAJORITY = 0.5
 
-const getObjectValues = (object) => Object.values(object);
+const tallyInitialVotes = (array, object) => {
+  object = {}
 
-const sumOfObjectValues = (object) => object.reduce((red, sum) => red + sum);
+  array.forEach(element => {
+    object[element]
+      ? object[element] += 1
+      : object[element] = 1
+  });
 
-const findKeyFromValues = (object, number) => Object.keys(object).find(key => object[key] === number);
+  return object;
+}
+
+const getObjectValues = (object) => {
+  return Object.values(object);
+}
+
+const sumOfObjectValues = (object) => {
+  return object.reduce((red, sum) => red + sum);
+}
+
+const findKeyFromValues = (object, number) => {
+  return Object.keys(object).find(key => object[key] === number);
+}
 
 const filterKeysFromValues = (object, number) => {
   return Object.keys(object).filter(key => object[key] === number);
 }
 
-const checkForMajority = (maxVotedFor, totalVotes) => {
+const hasMajority = (maxVotedFor, totalVotes) => {
   return (maxVotedFor / totalVotes) > MAJORITY
     ? true
     : false
