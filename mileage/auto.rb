@@ -7,4 +7,6 @@ class Auto
     @mileage = data[3]
     @fuel = data[4]
   end
+
+  def method_missing(method, *args, &block); end
 end
