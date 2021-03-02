@@ -19,7 +19,7 @@ class AutoSeeker
   end
 
   def self.median_mileage autos
-    prices = autos.collect(&:mileage).sort
+    prices = autos.collect(&:mileage).compact.sort
     (prices[(prices.length - 1) / 2].to_f + prices[prices.length / 2].to_f) / 2.0
   end
 end
