@@ -8,15 +8,20 @@ describe AutoSeeker do
       [2,'Blue',13999,25.0,'gas'],
       [3,'Teal',19000,27.0,'gas'],
       [4,'Red',14999,40.0,'diesel'],
+      [5,'Puce',29999,nil,'hamsters']
     ]
     @seeker = AutoSeeker.new data
   end
-
 
   describe "#filter " do
     it "can filter by color " do
       @seeker.filter 'color', 'Red'
       @seeker.autos.collect(&:color).uniq.must_equal ['Red']
+    end
+
+    it "can filter by any letter casing " do
+      @seeker.filter 'color', 'tEal'
+      @seeker.autos.collect(&:color).uniq.must_equal ['Teal']
     end
   end
 

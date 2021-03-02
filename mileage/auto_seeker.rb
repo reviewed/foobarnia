@@ -8,7 +8,7 @@ class AutoSeeker
 
   def filter key, match
     @autos = autos.select do |auto|
-      auto.send(key) == match
+      auto.send(key) == match.capitalize
     end
   end
 
