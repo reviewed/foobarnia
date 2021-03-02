@@ -4,7 +4,7 @@ require './auto_seeker'
 data = CSV.read('foobarnian_autos.csv')
 
 seeker = AutoSeeker.new data
-autos = seeker.filter(:color, ARGV[0])
+autos = seeker.filter(ARGV[0], ARGV[1], *ARGV)
 
 if autos.length == 0
   abort "no autos with color #{ARGV[0]} found"

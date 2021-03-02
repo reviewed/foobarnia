@@ -1,5 +1,5 @@
 class Auto
-  attr_reader :color, :price, :name, :mileage
+  attr_reader :color, :price, :mileage, :fuel
 
   def initialize data
     @color = data[1]

@@ -6,9 +6,16 @@ class AutoSeeker
     @data = data
   end
 
-  def filter key, match
-    @autos = autos.select do |auto|
-      auto.send(key) == match.capitalize
+  def filter key, match, *args
+    if (key == 'price')
+      upper_price = args[0]
+      @auto = autos.select do |auto|
+        auto.price >= match && auto.price <= upper_price
+      end
+    else
+      @autos = autos.select do |auto|
+        auto.send(key) == match
+      end
     end
   end
 

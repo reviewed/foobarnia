@@ -19,8 +19,20 @@ describe AutoSeeker do
     end
 
     it "can filter by any letter casing " do
-      @seeker.filter 'color', 'tEal'
+      @seeker.filter 'color', 'Teal'
       @seeker.autos.collect(&:color).uniq.must_equal ['Teal']
+    end
+
+    it "can filter by fuel type " do
+      @seeker.filter 'fuel', 'gas'
+      @seeker.autos.collect(&:fuel).uniq.must_equal ['gas']
+    end
+
+    it "can filter by price range " do
+      min = 14000
+      max = 18000
+      @seeker.filter 'price', min, max
+      @seeker.autos.select { |auto| auto.price >= min && auto.price <= max }.must_equal [@seeker.autos[3]]
     end
   end
 
