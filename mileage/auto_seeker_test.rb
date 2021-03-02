@@ -18,11 +18,6 @@ describe AutoSeeker do
       @seeker.autos.collect(&:color).uniq.must_equal ['Red']
     end
 
-    it "can filter by any letter casing " do
-      @seeker.filter 'color', 'Teal'
-      @seeker.autos.collect(&:color).uniq.must_equal ['Teal']
-    end
-
     it "can filter by fuel type " do
       @seeker.filter 'fuel', 'gas'
       @seeker.autos.collect(&:fuel).uniq.must_equal ['gas']
