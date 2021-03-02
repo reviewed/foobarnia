@@ -12,17 +12,35 @@ describe AutoSeeker do
     @seeker = AutoSeeker.new data
   end
 
-
   describe "#filter " do
     it "can filter by color " do
       @seeker.filter 'color', 'Red'
       @seeker.autos.collect(&:color).uniq.must_equal ['Red']
+    end
+
+    it "can filter by fuel type " do
+      @seeker.filter 'fuel', 'gas'
+      @seeker.autos.collect(&:fuel).uniq.must_equal ['gas']
+    end
+
+    it "can filter by price range " do
+      min = 14000
+      max = 18000
+      @seeker.filter 'price', min, max
+      @seeker.autos.select { |auto| auto.price >= min && auto.price <= max }.must_equal [@seeker.autos[3]]
     end
   end
 
   describe ".median_mileage " do
     it "calculates median mileage for all autos" do
       AutoSeeker.median_mileage(@seeker.autos).must_equal 26.0
+    end
+
+    it "calculates median mileage even with nil mileage values" do
+      no_mileage_auto = Auto.new [5,'Puce',29999,nil,'hamsters']
+      joined_array = @seeker.autos << no_mileage_auto
+
+      AutoSeeker.median_mileage(joined_array).must_equal 26.0
     end
   end
 end
