@@ -8,15 +8,15 @@ JavaScript.
 The candidates are identified by positive integers, and the votes will be
 provided to us as an unsorted Array of those integers.
 
-  1. If any candidate reaches a majority of votes, the function should return a
-single-element Array with the integer representing the winning candidate.
-  2. If there is no majority winner, then a runoff election will be held among the 3
-candidates that finished with the most votes. So in that case, our function
-needs to return an array of integers for the top 3 candidates, to identify
-candidates that qualified for the runoff.
-  3. Also in the runoff case, if there are multiple 3rd place candidates in a tie,
-then all candidates who tied for third place will qualify for the runoff. So in
-that situation, an Array with more than three integers may need to be returned.
+1. If any candidate reaches a majority of votes, the function should return a
+   single-element Array with the integer representing the winning candidate.
+2. If there is no majority winner, then a runoff election will be held among the 3
+   candidates that finished with the most votes. So in that case, our function
+   needs to return an array of integers for the top 3 candidates, to identify
+   candidates that qualified for the runoff.
+3. Also in the runoff case, if there are multiple 3rd place candidates in a tie,
+   then all candidates who tied for third place will qualify for the runoff. So in
+   that situation, an Array with more than three integers may need to be returned.
 
 The results do not have to be sorted in any special order.
 
@@ -42,9 +42,10 @@ your code.
 
 Once the tests are passing, consider this done. But, keep in mind, the tests
 involve only a small sample of votes. In reality, the Republic of Foobarnia has a
-huge population - **9007199254740992** to be exact - and *everyone* votes.
+huge population - **9007199254740992** to be exact - and _everyone_ votes.
 Furthermore, anyone can run for president simply by sending a postcard to the
-election office, so there are typically *several thousand* candidates. How will
+election office, so there are typically _several thousand_ candidates. How will
 your function behave under these circumstances? Should we be concerned about
 performance? Is there any way we can make it faster?
 
+- This function will behave well under circumstances where there are many votes and many candidates. This function has a time complexity of O(N) and an additional space complexity of O(N). The time complexity to access the tally hashMap used is constant time or O(1). Using a hashmap would be very benificial when tallying the votes and accessing the candidate vote counts even at scale. We would be able to make the vote counting faster if the provided array was already sorted and presented in descending order.
