@@ -20,9 +20,30 @@ describe AutoSeeker do
     end
   end
 
+describe "#filter " do
+    it "can filter by valid mileage (!nil)" do
+      @seeker.autos.collect(&:mileage).wont_be_nil()
+    end
+  end
+
+
   describe ".median_mileage " do
     it "calculates median mileage for all autos" do
       AutoSeeker.median_mileage(@seeker.autos).must_equal 26.0
+    end
+  end
+
+  describe ".fuel_type" do
+    it "returns the number of cars that run on gas fuel type" do
+      @seeker.filter 'fuel', 'gas'
+      @seeker.autos.collect(&:color).count.must_equal 3 
+    end
+  end
+
+   describe ".price_search" do
+    it "returns the number of cars that match price searched" do
+      @seeker.filter 'price', 19000
+      @seeker.autos.collect(&:price).count.must_equal 1 
     end
   end
 end

@@ -1,71 +1,52 @@
-exports.tally = function electionCount(array) {
-  if (array.length == 0) return null;
-  var tallyMap = {},
-    maxCount = 1,
-    modes = [];
-  for (var i = 0; i < array.length; i++) {
-    //set candidate to iterated value in array
-    var candidate = array[i];
-    //if candidate has no current vote then add 1 vote in tallyMap object
-    if (tallyMap[candidate] == null) tallyMap[candidate] = 1;
-    //if already in object then increment value
-    else tallyMap[candidate]++;
-    //if the value of the candidate is greater than maxCount
-    if (tallyMap[candidate] > maxCount) {
-      //set modes to the candidate name
-      modes = [candidate];
-      //assign the maxCount variable to however many votes the candidate has
-      maxCount = tallyMap[candidate];
-      //if the candidate is equal to maxCount
-    } else if (tallyMap[candidate] == maxCount) {
-      //add the candidate to the modes array
-      modes.push(candidate);
-      //set the maxCount counter to the candidate
-      maxCount = tallyMap[candidate];
+exports.tally = function electionCount(votes) {
+  //Create object with tally tallied per candidate
+  //set empty tally object
+  let tally = {};
+  //loop through votes array from beginning to end
+  for (var i = 0; i < votes.length; i++) {
+    //assign candidate value to iterated value of array
+    let candidate = votes[i];
+    //if candidate already has count in object than add vote if not set vote count to 1
+    tally[candidate] = tally[candidate] ? tally[candidate] + 1 : 1;
+  }
+  //set variable for vote count needed to pass majority
+  let majorityVote = Math.floor(votes.length / 2);
+
+  //Create an array in descending order of number of votes
+  //set empty
+  var voteCount = [];
+  for (key in tally) {
+    var value = tally[key];
+    voteCount.push(value);
+  }
+  voteCount = voteCount.sort(function (a, b) {
+    return b - a;
+  });
+
+  //Present Top Candidates or Majority Winner
+  //check to see if winner is greater or equal to majority
+  if (voteCount[0] >= majorityVote) {
+    //loop through tally object
+    for (let key in tally) {
+      //if key value pair in tally object is found return winner
+      if (tally[key] === voteCount[0]) {
+        return [Number(key)];
+      }
     }
-  }
-  let majority = array.length / 2;
-  if (maxCount > majority) {
-    return modes;
-  }
-
-  if (maxCount <= majority && Object.keys(tallyMap).length === 6) {
-    const requiredObj = {};
-    Object.keys(tallyMap)
-      .sort((a, b) => tallyMap[b] - tallyMap[a])
-      .forEach((key) => {
-        requiredObj[key] = tallyMap[key];
-      });
-    console.log(requiredObj);
-    let results = [
-      Object.keys(requiredObj)[0],
-      Object.keys(requiredObj)[1],
-      Object.keys(requiredObj)[2],
-    ];
-    results = results.filter(function (element) {
-      return element !== undefined;
-    });
-    return results.map(Number);
-  }
-
-  if (maxCount <= majority && Object.keys(tallyMap).length === 9) {
-    const requiredObj = {};
-    Object.keys(tallyMap)
-      .sort((a, b) => tallyMap[b] - tallyMap[a])
-      .forEach((key) => {
-        requiredObj[key] = tallyMap[key];
-      });
-    console.log(requiredObj);
-    let results = [
-      Object.keys(requiredObj)[0],
-      Object.keys(requiredObj)[1],
-      Object.keys(requiredObj)[2],
-      Object.keys(requiredObj)[3],
-      Object.keys(requiredObj)[4],
-    ];
-    results = results.filter(function (element) {
-      return element !== undefined;
-    });
-    return results.map(Number);
+  } else {
+    //set final
+    let finalWinners = [];
+    //loop through tally object by key
+    for (let key in tally) {
+      //if winners present in tally object and correspond to voteCount array then push values into finalWinners array
+      if (
+        tally[key] === voteCount[0] ||
+        tally[key] === voteCount[1] ||
+        tally[key] === voteCount[2]
+      ) {
+        finalWinners.push(Number(key));
+      }
+    }
+    return finalWinners;
   }
 };
