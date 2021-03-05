@@ -30,8 +30,8 @@ class AutoSeeker
       cars = autos.select{ |a| a.price.to_i <= 20000 } 
       p "there are #{cars.length} #{choice}priced cars. "
     elsif choice == "medium"
-        cars = autos.select{ |a| a.price.to_i > 20000 && a.price.to_i < 30000 }
-         p "there are #{cars.length} #{choice}-priced cars."
+      cars = autos.select{ |a| a.price.to_i > 20000 && a.price.to_i < 30000 }
+      p "there are #{cars.length} #{choice}-priced cars."
     elsif choice == "high"
       cars = autos.select{ |a| a.price.to_i >=30000} 
       p "there are #{cars.length} #{choice}-priced cars."
@@ -39,29 +39,21 @@ class AutoSeeker
       p "Try again: choices are low medium or high"
     end 
   end 
-# filter autos based on input 
-# input used to get the right choice 
-
-  # def self.find_price_range(choice, autos)
-  #   if choice == low
-  #     low = autos.select{ |a| a[:price] <=20000 } 
-  #     low_length = low.length
-  #     p "there are #{low_length} low priced cars: #{low}"
-  #   elsif choice == 2
-  #     medium = autos.select{ |a| auto[:price] > 20000 && auto[:price] < 30000 }
-  #     medium_length = medium.length
-  #     p "there are #{medium_length} low priced cars: #{medium}"
-  #   else choice == 3
-  #     high = autos.select{ |a| a[:price] >=30000} 
-  #     p "high priced cars: #{high.length}"
-  #   end
-  # end 
+  # to print all cars of a choice: #{cars} 
+  # could refactor to switch/case
+  # what would it look like with #sort first/instead
 
 
 
-  def pick_fuel_type fuel_type
-
-  end
+  def pick_fuel_type choice 
+    p choice
+    cars = autos.select do  |a|
+      if a.fuel
+        a.fuel == choice 
+      end
+    end
+    p "there are #{cars.length} #{choice}-fueled cars." 
+  end 
 
 end
-
+# if a[:fuel]

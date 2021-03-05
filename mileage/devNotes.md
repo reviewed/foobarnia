@@ -26,5 +26,13 @@ Teal isn’t working
         -- is goal to clean up all data before it's initialized? 
         
     -- working with array of arrays 
-
+8. Filter_by_price: pull some data and play it on replit, 
+    -- bring in choice with ARGV (so much nicer than #gets.chomp(!)
+    -- think about CLI skills -- choice is the variable, use conditional to pull it out. 
+    -- I am freezing on a refactor to make this less verbose... okay for now. 
+    -- refactor read out for abstraction. TODO: find the abstraction in the 
+    -- TODO: what would test look like: make sure choice is there,
+9. Filter_by_Fuel_Type 
+  -- similar to filter_by_price, but simpler, no need to convert cli input to integers. Done. Tricky part was debugging, because auto.rb hadn't included it in the attr_reader (and my screen was small, so I didn't see it right away!)
+  
 
