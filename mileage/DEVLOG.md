@@ -34,5 +34,32 @@ Teal isn’t working
     -- TODO: what would test look like: make sure choice is there,
 9. Filter_by_Fuel_Type 
   -- similar to filter_by_price, but simpler, no need to convert cli input to integers. Done. Tricky part was debugging, because auto.rb hadn't included it in the attr_reader (and my screen was small, so I didn't see it right away!)
-  
+10. What else before finishing? 
+   -- reread README.md 
 
+
+
+____
+
+# learning ARGV
+
+# input_array = ARGV
+
+# p input_array.length 
+# p input_array.to_s
+# first_arg, *the_rest = ARGV
+
+first_arg, second_arg, *the_rest = ARGV
+p first_arg
+p second_arg
+p the_rest
+
+# learning CSV
+require 'csv'
+
+CSV.foreach( 'test.csv') do |row|
+  puts row.inspect
+end 
+
+# can also do:
+CSV.read('test.csv')

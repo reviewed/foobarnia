@@ -7,8 +7,8 @@ seeker = AutoSeeker.new data
 choice = seeker.filter_by_price(ARGV[0])
 
 
-# Directions: run ruby prices.rb <price range> 
-# where price range is either low, medium or high
+# Directions: run ruby prices.rb <price_range> 
+# where <price_range> is either low, medium or high
 
 # # next: divide autos by price, so ARGV input can match 
 # # 1/low < 20,000

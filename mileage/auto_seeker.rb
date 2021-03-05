@@ -6,7 +6,7 @@ class AutoSeeker
     @data = data
   end
 
-# match is ARGV value 
+  # match is ARGV value 
   def filter key, match
     @autos = autos.select do |auto|
       auto.send(key) == match
@@ -44,16 +44,14 @@ class AutoSeeker
   # what would it look like with #sort first/instead
 
 
-
-  def pick_fuel_type choice 
-    p choice
+  def filter_by_fuel_type choice 
     cars = autos.select do  |a|
       if a.fuel
-        a.fuel == choice 
+        a.fuel.to_s == choice 
       end
     end
-    p "there are #{cars.length} #{choice}-fueled cars." 
+    p "There are #{cars.length} #{choice}-fueled cars." 
   end 
-
+  # add catch for missing data, here, in auto.rb
+  # add type-catch, in case of weird data 
 end
-# if a[:fuel]
