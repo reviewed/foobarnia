@@ -1,1 +1,4 @@
+# wouldn't bundle w/o adding source, even thouhg
+# it's in Gemfile.lock. 
+source 'https://rubygems.org'
 gem 'minitest'
